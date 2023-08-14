@@ -22,10 +22,10 @@ class ControladorInventarioProducto():
     """
     Asignacion estudiante y materia a inscripción
     """
-    def create(self, infoInventario, id_inventario,id_producto):
+    def create(self, infoInventario):
         nuevoInventarioProducto = InventarioProducto(infoInventario)
-        producto = Producto(self.repositorioProducto.findById(id_producto))
-        inventario = Inventario(self.repositorioInventario.findById(id_inventario))
+        producto = Producto(self.repositorioProducto.findById(infoInventario["producto"]))
+        inventario = Inventario(self.repositorioInventario.findById(infoInventario["inventario"]))
         nuevoInventarioProducto.inventario = inventario
         nuevoInventarioProducto.producto = producto
         return self.repositorioInventarioProducto.save(nuevoInventarioProducto)

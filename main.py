@@ -159,10 +159,10 @@ def crearInventario(id_almacenista):
     json = miControladorInventario.create(data, id_almacenista)
     return jsonify(json)
 
-@app.route("/inventarios/<string:id_inventarios>/almacenista/<string:id_almacenista>/producto/<string:id_producto>", methods=['PUT'])
-def modificarInventario(id_inventario, id_almacenista, id_producto):
+@app.route("/inventarios/<string:id_inventario>", methods=['PUT'])
+def modificarInventario(id_inventario):
     data = request.get_json()
-    json = miControladorInventario.update(id_inventario, data, id_almacenista, id_producto)
+    json = miControladorInventario.update(id_inventario, data)
     return jsonify(json)
 
 @app.route("/inventarios/<string:id_inventario>", methods=['DELETE'])
@@ -184,10 +184,10 @@ def getInventarioProductos(id):
     json = miControladorInventarioProducto.show(id)
     return jsonify(json)
 
-@app.route("/inventarioproductos/inventario/<string:id_inventario>/producto/<string:id_producto>", methods=['POST'])
-def crearInventarioProductos(id_inventario,id_producto):
+@app.route("/inventarioproductos", methods=['POST'])
+def crearInventarioProductos():
     data = request.get_json()
-    json = miControladorInventarioProducto.create(data, id_inventario,id_producto)
+    json = miControladorInventarioProducto.create(data)
     return jsonify(json)
 
 @app.route("/inventarios/<string:id_inventarios>/almacenista/<string:id_almacenista>/producto/<string:id_producto>", methods=['PUT'])

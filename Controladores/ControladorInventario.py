@@ -28,20 +28,18 @@ class ControladorInventario():
 
     def show(self, id):
         elInventario = Inventario(self.repositorioInventario.findById(id))
+        elInventario.almacenista=elInventario.almacenista["_id"]
         return elInventario.__dict__
     """
     Modificación de inscripción (estudiante y materia)
     """
-    def update(self, id, infoInventario, id_almacenista, id_producto):
+    def update(self, id, infoInventario):
         elInventario = Inventario(self.repositorioInventario.findById(id))
-        elInventario.anio = infoInventario["año"]
-        elInventario.semestre = infoInventario["mes"]
-        elInventario.cantTotal = infoInventario["cantidad"]
-        elAlmacenista = Almacenista(self.repositorioAlmacenista.findById(id_almacenista))
-        #elProducto = Producto(self.repositorioProducto.findById(id_producto))
-        elInventario.almacenista = elAlmacenista
-
-        #elInventario.producto = elProducto
+        elInventario.ano = infoInventario["ano"]
+        #elInventario.cantidad = infoInventario["cantidad"]
+        elInventario.mes = infoInventario["mes"]
+        elInventario.nombre_inventario = infoInventario["nombre_inventario"]
+        elInventario.almacenista=Almacenista(self.repositorioAlmacenista.findById(infoInventario["almacenista"]))
         return self.repositorioInventario.save(elInventario)
 
     def delete(self, id):
